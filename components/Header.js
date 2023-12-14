@@ -3,9 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useConfig } from '@/lib/config'
 import { useLocale } from '@/lib/locale'
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1156918246014761"
-     crossorigin="anonymous"></script>
+import useTheme from '@/lib/theme'
 
 const NavBar = () => {
   const BLOG = useConfig()
