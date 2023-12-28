@@ -21,7 +21,7 @@ const BLOG = {
   socialLink: 'https://twitter.com/devilpenakut',
   seo: {
     keywords: ['Blog', 'Website', 'Notion'],
-    googleSiteVerification: '' // Remove the value or replace it with your own google site verification code
+    googleSiteVerification: '<script async defer data-website-id="6e76bf1c-18e0-4dea-a2f8-d6a019d51e0f" src="https://umami-opal-beta.vercel.app/umami.js"></script>' // Remove the value or replace it with your own google site verification code
   },
   notionPageId: process.env.NOTION_PAGE_ID, // DO NOT CHANGE THIS！！！
   notionAccessToken: process.env.NOTION_ACCESS_TOKEN, // Useful if you prefer not to make your database public
