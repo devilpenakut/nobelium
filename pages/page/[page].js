@@ -4,6 +4,7 @@ import Container from '@/components/Container'
 import BlogPost from '@/components/BlogPost'
 import Pagination from '@/components/Pagination'
 import { getAllPosts } from '@/lib/notion'
+import AdComponent from '../components/AdComponent';
 
 const Page = ({ postsToShow, page, showNext }) => {
   return (
@@ -11,6 +12,7 @@ const Page = ({ postsToShow, page, showNext }) => {
       {postsToShow &&
         postsToShow.map(post => <BlogPost key={post.id} post={post} />)}
       <Pagination page={page} showNext={showNext} />
+      <AdComponent />
     </Container>
   )
 }
