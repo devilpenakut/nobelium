@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useConfig } from '@/lib/config'
 import { useLocale } from '@/lib/locale'
 import useTheme from '@/lib/theme'
+import DarkModeToggle from '@/components/DarkModeToggle'
 
 const NavBar = () => {
   const BLOG = useConfig()
@@ -119,7 +120,12 @@ export default function Header ({ navBarTitle, fullWidth }) {
             onClick={handleClickHeader}
           />
         </div>
-        <NavBar />
+         <div className="flex items-center">
+          <NavBar />
+          <div className="ml-4"> {/* Tambahkan margin kiri untuk memisahkan dari NavBar */}
+            <DarkModeToggle />
+          </div>
+        </div>
       </div>
     </>
   )
