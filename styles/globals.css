@@ -163,3 +163,7 @@ nav {
 .capture-pointer-events * {
   @apply pointer-events-none;
 }
+
+.dark-mode-toggle {
+  pointer-events: auto;
+}
