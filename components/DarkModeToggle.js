@@ -1,19 +1,15 @@
 import useTheme from '@/lib/theme'
 
-const DarkModeToggle = () => {
-  const { dark, toggleDark } = useTheme()
+export default function DarkModeToggle() {
+  const { dark, toggleDarkMode } = useTheme()
+
   return (
     <button
-      className="dark-mode-toggle bg-gray-200 dark:bg-gray-800 rounded-full p-2"
-      onClick={(e) => {
-        e.stopPropagation();
-        console.log("Toggle clicked!");
-        toggleDark();
-      }}
+      onClick={toggleDarkMode}
+      className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700"
+      aria-label="Toggle dark mode"
     >
-      {dark ? '🌞' : '🌙'}
+      {dark ? '🌙' : '🌞'}
     </button>
   )
 }
-
-export default DarkModeToggle
