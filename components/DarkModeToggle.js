@@ -1,4 +1,3 @@
-import React from 'react'
 import { useTheme } from '@/lib/theme'
 
 export default function DarkModeToggle() {
@@ -14,4 +13,3 @@ export default function DarkModeToggle() {
     </button>
   )
 }
-export default DarkModeToggle
