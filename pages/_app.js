@@ -16,9 +16,15 @@ import Scripts from '@/components/Scripts'
 const Ackee = dynamic(() => import('@/components/Ackee'), { ssr: false })
 const Gtag = dynamic(() => import('@/components/Gtag'), { ssr: false })
 
-export default function MyApp ({ Component, pageProps, config, locale }) {
+export default function MyApp({ Component, pageProps, config, locale }) {
+  // Ensure config includes an appearance setting
+  const configWithAppearance = {
+    ...config,
+    appearance: config.appearance || 'auto' // Default to 'auto' if not set
+  }
+
   return (
-    <ConfigProvider value={config}>
+    <ConfigProvider value={configWithAppearance}>
       <Scripts />
       <LocaleProvider value={locale}>
         <ThemeProvider>
