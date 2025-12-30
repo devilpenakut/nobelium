@@ -18,7 +18,14 @@ module.exports = {
       }
     ]
   },
-  transpilePackages: ['dayjs']
+  transpilePackages: ['dayjs'],
+
+  webpack: (config) => {
+    config.resolve.alias['react-notion-x/build/third-party/pdf.js'] =
+      require.resolve('./lib/stubs/react-notion-x-pdf.js')
+    return config
+  }
+
   // webpack: (config, { dev, isServer }) => {
   //   // Replace React with Preact only in client production build
   //   if (!dev && !isServer) {
