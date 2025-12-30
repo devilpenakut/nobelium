@@ -20,11 +20,17 @@ module.exports = {
   },
   transpilePackages: ['dayjs'],
 
-  webpack: (config) => {
-    config.resolve.alias['react-notion-x/build/third-party/pdf.js'] =
-      require.resolve('./lib/stubs/react-notion-x-pdf.js')
-    return config
-  }
+webpack: (config) => {
+  // Stub PDF dari react-notion-x
+  config.resolve.alias['react-notion-x/build/third-party/pdf.js'] =
+    require.resolve('./lib/stubs/react-notion-x-pdf.js')
+
+  // 🔴 TAMBAHAN INI (react-pdf juga distub)
+  config.resolve.alias['react-pdf'] =
+    require.resolve('./lib/stubs/react-pdf.js')
+
+  return config
+}
 
   // webpack: (config, { dev, isServer }) => {
   //   // Replace React with Preact only in client production build
