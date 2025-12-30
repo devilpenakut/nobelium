@@ -25,7 +25,9 @@ const NavBar = () => {
                 key={link.id}
                 className="block ml-4 text-black dark:text-gray-50 nav"
               >
-                <Link href={link.to} target={link.external ? '_blank' : null}>{link.name}</Link>
+                <Link href={link.to} target={link.external ? '_blank' : null}>
+                  {link.name}
+                </Link>
               </li>
             )
         )}
@@ -34,13 +36,13 @@ const NavBar = () => {
   )
 }
 
-export default function Header ({ navBarTitle, fullWidth }) {
+export default function Header({ navBarTitle, fullWidth }) {
   const BLOG = useConfig()
   const { dark } = useTheme()
 
   // Favicon
-
-  const resolveFavicon = fallback => !fallback && dark ? '/favicon.dark.png' : '/favicon.png'
+  const resolveFavicon = fallback =>
+    !fallback && dark ? '/favicon.dark.png' : '/favicon.png'
   const [favicon, _setFavicon] = useState(resolveFavicon())
   const setFavicon = fallback => _setFavicon(resolveFavicon(fallback))
 
@@ -53,13 +55,19 @@ export default function Header ({ navBarTitle, fullWidth }) {
   const useSticky = !BLOG.autoCollapsedNavBar
   const navRef = useRef(/** @type {HTMLDivElement} */ undefined)
   const sentinelRef = useRef(/** @type {HTMLDivElement} */ undefined)
-  const handler = useCallback(([entry]) => {
-    if (useSticky && navRef.current) {
-      navRef.current?.classList.toggle('sticky-nav-full', !entry.isIntersecting)
-    } else {
-      navRef.current?.classList.add('remove-sticky')
-    }
-  }, [useSticky])
+  const handler = useCallback(
+    ([entry]) => {
+      if (useSticky && navRef.current) {
+        navRef.current?.classList.toggle(
+          'sticky-nav-full',
+          !entry.isIntersecting
+        )
+      } else {
+        navRef.current?.classList.add('remove-sticky')
+      }
+    },
+    [useSticky]
+  )
 
   useEffect(() => {
     const sentinelEl = sentinelRef.current
@@ -73,7 +81,7 @@ export default function Header ({ navBarTitle, fullWidth }) {
 
   const titleRef = useRef(/** @type {HTMLParagraphElement} */ undefined)
 
-  function handleClickHeader (/** @type {MouseEvent} */ ev) {
+  function handleClickHeader(/** @type {MouseEvent} */ ev) {
     if (![navRef.current, titleRef.current].includes(ev.target)) return
 
     window.scrollTo({
@@ -112,17 +120,18 @@ export default function Header ({ navBarTitle, fullWidth }) {
               onError={() => setFavicon(true)}
             />
           </Link>
+
           <HeaderName
             ref={titleRef}
             siteTitle={BLOG.title}
             siteDescription={BLOG.description}
             postTitle={navBarTitle}
-            onClick={handleClickHeader}
           />
         </div>
-         <div className="flex items-center">
+        <div className="flex items-center">
           <NavBar />
-          <div className="ml-4"> {/* Tambahkan margin kiri untuk memisahkan dari NavBar */}
+          <div className="ml-4">
+            {/* Tambahkan margin kiri untuk memisahkan dari NavBar */}
             <DarkModeToggle />
           </div>
         </div>
@@ -131,18 +140,24 @@ export default function Header ({ navBarTitle, fullWidth }) {
   )
 }
 
-const HeaderName = forwardRef(function HeaderName ({ siteTitle, siteDescription, postTitle, onClick }, ref) {
+const HeaderName = forwardRef(function HeaderName(
+  { siteTitle, siteDescription, postTitle },
+  ref
+) {
   return (
-    <p
+    <Link
+      href="/"
       ref={ref}
-      className="header-name ml-2 font-medium text-gray-600 dark:text-gray-300 capture-pointer-events grid-rows-1 grid-cols-1 items-center"
-      onClick={onClick}
+      className="header-name ml-2 font-medium text-gray-600 dark:text-gray-300 capture-pointer-events grid-rows-1 grid-cols-1 items-center cursor-pointer"
+      aria-label="Go to home"
     >
-      {postTitle && <span className="post-title row-start-1 col-start-1">{postTitle}</span>}
+      {postTitle && (
+        <span className="post-title row-start-1 col-start-1">{postTitle}</span>
+      )}
       <span className="row-start-1 col-start-1">
         <span className="site-title">{siteTitle}</span>
         <span className="site-description font-normal">, {siteDescription}</span>
       </span>
-    </p>
+    </Link>
   )
 })
